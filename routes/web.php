@@ -1,7 +1,12 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\controller\AdminController;
 
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
